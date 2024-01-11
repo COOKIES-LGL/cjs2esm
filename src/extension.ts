@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 import babel from "@babel/core";
-import esmCjsPlugin from "./plugins/esm-2-cjs-plugin";
-import cjsEsmPlugin from "./plugins/cjs-2-esm-plugin";
+import EsmCjsPlugin from "./plugins/esm-2-cjs-plugin";
+import CjsEsmPlugin from "./plugins/cjs-2-esm-plugin";
 
 export function activate(context: vscode.ExtensionContext) {
   const esModuleToCommonjsDisposable = vscode.commands.registerCommand("cjs2esm.cjsToEsm", () => {
@@ -11,10 +11,11 @@ export function activate(context: vscode.ExtensionContext) {
     }
     activeTextEditor.edit((editBuilder) => {
       const text = activeTextEditor.document.getText();
-      let { code } = babel.transformSync(text, {
+      const babelFileResult = babel.transformSync(text, {
         sourceType: "module",
-        plugins: [esmCjsPlugin],
+        plugins: [EsmCjsPlugin],
       });
+      const code = babelFileResult?.code || "";
       const end = new vscode.Position(activeTextEditor.document.lineCount + 1, 0);
       editBuilder.replace(new vscode.Range(new vscode.Position(0, 0), end), code);
     });
@@ -27,10 +28,11 @@ export function activate(context: vscode.ExtensionContext) {
     }
     activeTextEditor.edit((editBuilder) => {
       const text = activeTextEditor.document.getText();
-      let { code } = babel.transformSync(text, {
+      const babelFileResult = babel.transformSync(text, {
         sourceType: "module",
-        plugins: [cjsEsmPlugin],
+        plugins: [CjsEsmPlugin],
       });
+      const code = babelFileResult?.code || "";
       const end = new vscode.Position(activeTextEditor.document.lineCount + 1, 0);
       editBuilder.replace(new vscode.Range(new vscode.Position(0, 0), end), code);
     });

@@ -63,6 +63,7 @@
     "test": "vscode-test"
   },
   "devDependencies": {
+    "@types/babel__core": "^7.20.5",
     "@types/mocha": "^10.0.6",
     "@types/node": "18.x",
     "@types/vscode": "^1.85.0",

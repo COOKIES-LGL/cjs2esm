@@ -15,11 +15,11 @@
     "commands": [
       {
         "command": "cjs2esm.cjsToEsm",
-        "title": "CommonJs To EsModule"
+        "title": "CjsToEsm"
       },
       {
         "command": "cjs2esm.esmToCjs",
-        "title": "EsModule TO CommonJs"
+        "title": "EsmToCjs"
       }
     ],
     "keybindings": [

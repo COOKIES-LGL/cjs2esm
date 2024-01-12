@@ -1,6 +1,7 @@
-import { NodePath, types as t } from "@babel/core";
+import { NodePath } from "@babel/core";
 
-export default function () {
+export default function (babel) {
+  const { types: t } = babel;
   return {
     name: "cjs-to-esm",
     visitor: {

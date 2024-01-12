@@ -1,43 +1,48 @@
 import * as vscode from "vscode";
-import babel from "@babel/core";
+import * as babel from "@babel/core";
 import EsmCjsPlugin from "./plugins/esm-2-cjs-plugin";
 import CjsEsmPlugin from "./plugins/cjs-2-esm-plugin";
 
+const commandsList = [
+  {
+    command: "cjs2esm.cjsToEsm",
+    plugin: CjsEsmPlugin,
+  },
+  {
+    command: "cjs2esm.esmToCjs",
+    plugin: EsmCjsPlugin,
+  },
+];
+
 export function activate(context: vscode.ExtensionContext) {
-  const esModuleToCommonjsDisposable = vscode.commands.registerCommand("cjs2esm.cjsToEsm", () => {
-    const activeTextEditor = vscode.window.activeTextEditor;
-    if (!activeTextEditor) {
-      return;
-    }
-    activeTextEditor.edit((editBuilder) => {
-      const text = activeTextEditor.document.getText();
-      const babelFileResult = babel.transformSync(text, {
-        sourceType: "module",
-        plugins: [EsmCjsPlugin],
-      });
-      const code = babelFileResult?.code || "";
-      const end = new vscode.Position(activeTextEditor.document.lineCount + 1, 0);
-      editBuilder.replace(new vscode.Range(new vscode.Position(0, 0), end), code);
-    });
+  commandsList.forEach((commandItem) => {
+    const commonjsToEsModuleDisposable = vscode.commands.registerCommand(
+      commandItem.command,
+      () => {
+        const activeTextEditor = vscode.window.activeTextEditor;
+        if (!activeTextEditor) {
+          return;
+        }
+        activeTextEditor.edit(async (editBuilder) => {
+          const text = activeTextEditor.document.getText();
+          try {
+            const babelFileResult = babel.transformSync(text, {
+              sourceType: "module",
+              plugins: [commandItem.plugin],
+            });
+            const code = babelFileResult?.code || "";
+            const end = new vscode.Position(activeTextEditor.document.lineCount + 1, 0);
+            await editBuilder.replace(new vscode.Range(new vscode.Position(0, 0), end), code);
+            vscode.commands.executeCommand("editor.action.formatDocument");
+          } catch (error) {
+            vscode.window.showWarningMessage("文件存在无法解析节点");
+            console.log(error);
+          }
+        });
+      }
+    );
+    context.subscriptions.push(commonjsToEsModuleDisposable);
   });
-  context.subscriptions.push(esModuleToCommonjsDisposable);
-  const commonjsToEsModuleDisposable = vscode.commands.registerCommand("cjs2esm.esmToCjs", () => {
-    const activeTextEditor = vscode.window.activeTextEditor;
-    if (!activeTextEditor) {
-      return;
-    }
-    activeTextEditor.edit((editBuilder) => {
-      const text = activeTextEditor.document.getText();
-      const babelFileResult = babel.transformSync(text, {
-        sourceType: "module",
-        plugins: [CjsEsmPlugin],
-      });
-      const code = babelFileResult?.code || "";
-      const end = new vscode.Position(activeTextEditor.document.lineCount + 1, 0);
-      editBuilder.replace(new vscode.Range(new vscode.Position(0, 0), end), code);
-    });
-  });
-  context.subscriptions.push(commonjsToEsModuleDisposable);
 }
 
 export function deactivate() {}

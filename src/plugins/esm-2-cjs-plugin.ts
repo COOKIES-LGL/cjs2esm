@@ -1,6 +1,7 @@
-import { NodePath, types as t } from "@babel/core";
+import { NodePath } from "@babel/core";
 
-export default function () {
+export default function (babel) {
+  const { types: t } = babel;
   return {
     name: "esm-to-cjs",
     visitor: {
@@ -39,7 +40,7 @@ export default function () {
         const { node } = path;
         if (node.declaration) {
           if (t.isVariableDeclaration(node.declaration)) {
-            const newNodes: t.ExpressionStatement[] = [];
+            const newNodes: any[] = [];
             for (let i = 0; i < node.declaration.declarations.length; i++) {
               const newNode = t.expressionStatement(
                 t.assignmentExpression(
@@ -54,7 +55,7 @@ export default function () {
           }
         } else {
           if (node.specifiers.length > 0) {
-            const newNodes: t.ExpressionStatement[] = [];
+            const newNodes: any[] = [];
             for (let i = 0; i < node.specifiers.length; i++) {
               const newNode = t.expressionStatement(
                 t.assignmentExpression(

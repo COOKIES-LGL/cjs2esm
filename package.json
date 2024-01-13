@@ -6,6 +6,11 @@
   "engines": {
     "vscode": "^1.85.0"
   },
+  "author": "guiLin.li",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:COOKIES-LGL/cjs2esm.git"
+  },
   "categories": [
     "Other"
   ],
@@ -25,14 +30,14 @@
     "keybindings": [
       {
         "command": "cjs2esm.cjsToEsm",
-        "key": "ctrl+c+e",
-        "mac": "cmd+c+e",
+        "key": "ctrl+g",
+        "mac": "cmd+g",
         "when": "editorTextFocus"
       },
       {
         "command": "cjs2esm.esmToCjs",
-        "key": "ctrl+e+c",
-        "mac": "cmd+e+c",
+        "key": "ctrl+y",
+        "mac": "cmd+y",
         "when": "editorTextFocus"
       }
     ],

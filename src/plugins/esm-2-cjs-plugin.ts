@@ -1,6 +1,6 @@
-import { NodePath } from "@babel/core";
+import { NodePath, PluginItem } from "@babel/core";
 
-export default function (babel) {
+export default function (babel): PluginItem {
   const { types: t } = babel;
   return {
     name: "esm-to-cjs",
@@ -9,7 +9,11 @@ export default function (babel) {
         const { node } = path;
         const specifiers = node.specifiers;
         const source = node.source;
-        if (t.isImportDefaultSpecifier(specifiers[0])) {
+        if (
+          t.isImportDefaultSpecifier(specifiers[0]) ||
+          t.isImportNamespaceSpecifier(specifiers[0])
+        ) {
+          // 默认default、 * as 导入处理
           const newNode = t.variableDeclaration("const", [
             t.variableDeclarator(
               t.identifier(specifiers[0].local.name),
@@ -21,14 +25,14 @@ export default function (babel) {
           const newNode = t.variableDeclaration("const", [
             t.variableDeclarator(
               t.objectPattern(
-                specifiers.map((item) =>
-                  t.objectProperty(
-                    t.identifier(item.local.name),
+                specifiers.map((item) => {
+                  return t.objectProperty(
+                    t.identifier(item.imported.name),
                     t.identifier(item.local.name),
                     false,
                     true
-                  )
-                )
+                  );
+                })
               ),
               t.callExpression(t.identifier("require"), [source])
             ),
@@ -121,6 +125,13 @@ export default function (babel) {
             );
             path.replaceWith(newNode);
           }
+        }
+      },
+      CallExpression(path) {
+        // 处理动态导入import()
+        if (t.isImport(path.node.callee)) {
+          const newNode = t.callExpression(t.identifier("require"), path.node.arguments);
+          path.replaceWith(newNode);
         }
       },
     },

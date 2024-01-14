@@ -1,24 +1,13 @@
-# cjs2esm README
-
-yo code 创建
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-- `myExtension.enable`: Enable/disable this extension.
-
 ## Release Notes
+
+初始化
 
 ### 1.0.0
 
 ---
 
-## Working with Markdown
+- Change CJS TO ESM (`Cmd+g` on macOS or `Ctrl+g` on Windows and Linux).
+- Change ESM TO CJS (`Cmd+y` on macOS or `Ctrl+y` on Windows and Linux).
 
 ## For more information
 

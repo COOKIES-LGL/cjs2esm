@@ -2,6 +2,8 @@
 
 初始化
 
+token lknzdbpoldtgzf6ir77kmrkixf2adiaspr5yrthozyrpd52lsvga
+
 ### 1.0.0
 
 ---

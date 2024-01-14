@@ -7,6 +7,8 @@
     "vscode": "^1.85.0"
   },
   "author": "guiLin.li",
+  "publisher": "guilin.li",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git@github.com:COOKIES-LGL/cjs2esm.git"
@@ -58,6 +60,7 @@
     }
   },
   "scripts": {
+    "vsce": "vsce package",
     "vscode:prepublish": "yarn run package",
     "compile": "webpack",
     "watch": "webpack --watch",
@@ -84,6 +87,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "@babel/core": "^7.23.7"
+    "@babel/core": "^7.22.9",
+    "@babel/preset-typescript": "^7.23.3"
   }
 }

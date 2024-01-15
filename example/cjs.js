@@ -8,6 +8,10 @@ require("./esm").then(({ lodashAdd }) => {
 
 exports.bigNone = 10000;
 
+const smallNone = 0.001;
+
+exports.smallNone = smallNone;
+
 exports.lodashAdd = (aValue, bValue) => {
   return aValue + bValue;
 };

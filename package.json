@@ -23,11 +23,11 @@
     "commands": [
       {
         "command": "cjs2esm.cjsToEsm",
-        "title": "CjsToEsm"
+        "title": "Cjs⇋Esm"
       },
       {
-        "command": "cjs2esm.esmToCjs",
-        "title": "EsmToCjs"
+        "command": "cjs2esm.selectionRunTransform",
+        "title": "Run Cjs⇋Esm Selection"
       }
     ],
     "keybindings": [
@@ -38,7 +38,7 @@
         "when": "editorTextFocus"
       },
       {
-        "command": "cjs2esm.esmToCjs",
+        "command": "cjs2esm.selectionRunTransform",
         "key": "ctrl+y",
         "mac": "cmd+y",
         "when": "editorTextFocus"
@@ -53,7 +53,7 @@
         },
         {
           "when": "editorFocus",
-          "command": "cjs2esm.esmToCjs",
+          "command": "cjs2esm.selectionRunTransform",
           "group": "navigation"
         }
       ]

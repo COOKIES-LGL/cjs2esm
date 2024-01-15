@@ -1,6 +1,6 @@
 ## Release Notes
 
-初始化
+嘎嘎好用的 commonJs esModule 互转插件
 
 ### 1.0.0
 

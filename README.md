@@ -12,6 +12,6 @@
 ## For more information
 
 - [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-- [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+- [@babel/plugin-transform-modules-commonjs](https://www.npmjs.com/package/@babel/plugin-transform-modules-commonjs)
+- [babel-plugin-transform-commonjs](https://www.npmjs.com/package/babel-plugin-transform-commonjs)
+  **Enjoy!**

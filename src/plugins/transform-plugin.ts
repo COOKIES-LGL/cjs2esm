@@ -202,7 +202,6 @@ export default function (babel): PluginItem {
           return;
         }
         const { node } = path;
-        debugger;
         if (node.declaration) {
           if (t.isVariableDeclaration(node.declaration)) {
             const newNodes: any[] = [];

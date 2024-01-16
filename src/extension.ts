@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 import * as babel from "@babel/core";
 import TransformPlugin from "./plugins/transform-plugin";
+import TransformTsPlugin from "@babel/plugin-transform-typescript";
 
 const commandsList = [
   {
@@ -42,7 +43,7 @@ export function activate(context: vscode.ExtensionContext) {
           try {
             const babelFileResult = babel.transformSync(text, {
               sourceType: "module",
-              plugins: [commandItem.plugin],
+              plugins: [TransformTsPlugin, commandItem.plugin],
             });
             const code = babelFileResult?.code || "";
             const end = new vscode.Position(activeTextEditor.document.lineCount + 1, 0);

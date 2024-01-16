@@ -1,3 +1,4 @@
+import React, { FC } from "react";
 import * as babel from "@babel/core";
 import { traverse } from "@babel/core";
 import { types as t } from "@babel/core";

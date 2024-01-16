@@ -158,6 +158,26 @@ export default function (babel): PluginItem {
             ),
           ]);
           path.replaceWith(newNode);
+          if (t.isImportDefaultSpecifier(specifiers[0]) && specifiers.length > 1) {
+            // 处理即有默认default又有 { * } 部分导入的场景
+            specifiers.splice(0, 1);
+            const newNode = t.variableDeclaration("const", [
+              t.variableDeclarator(
+                t.objectPattern(
+                  specifiers.map((item) => {
+                    return t.objectProperty(
+                      t.identifier(item.imported.name),
+                      t.identifier(item.local.name),
+                      false,
+                      true
+                    );
+                  })
+                ),
+                t.callExpression(t.identifier("require"), [source])
+              ),
+            ]);
+            path.insertAfter(newNode);
+          }
         } else {
           const newNode = t.variableDeclaration("const", [
             t.variableDeclarator(
@@ -182,6 +202,7 @@ export default function (babel): PluginItem {
           return;
         }
         const { node } = path;
+        debugger;
         if (node.declaration) {
           if (t.isVariableDeclaration(node.declaration)) {
             const newNodes: any[] = [];
@@ -198,6 +219,7 @@ export default function (babel): PluginItem {
             path.replaceWithMultiple(newNodes);
           }
         } else {
+          debugger;
           if (node.specifiers.length > 0) {
             const newNodes: any[] = [];
             for (let i = 0; i < node.specifiers.length; i++) {

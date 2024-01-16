@@ -7,3 +7,5 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [Unreleased]
 
 - Initial release
+
+- 处理 import React, { FC } from "react"; 既有默认又有部分导入的 import

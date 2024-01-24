@@ -11,6 +11,10 @@ import("./cjs").then(({ lodashAdd }) => {
   lodashAdd(1, 101);
 });
 
+traverse("ast");
+t.isArrayPattern();
+console.log(React.Fragment);
+
 export const lodashAdd = (aValue, bValue) => {
   return aValue + bValue;
 };

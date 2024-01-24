@@ -218,7 +218,6 @@ export default function (babel): PluginItem {
             path.replaceWithMultiple(newNodes);
           }
         } else {
-          debugger;
           if (node.specifiers.length > 0) {
             const newNodes: any[] = [];
             for (let i = 0; i < node.specifiers.length; i++) {

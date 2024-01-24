@@ -9,6 +9,10 @@
 - Change CJS ⇋ ESM (`Cmd+g` on macOS or `Ctrl+g` on Windows and Linux).
 - Change ESM ⇋ CJS Basic Selection (`Cmd+y` on macOS or `Ctrl+y` on Windows and Linux).
 
+### demo
+
+![demo](./assets/cjs2esm.gif)
+
 ## For more information
 
 - [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)

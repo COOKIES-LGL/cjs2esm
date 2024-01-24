@@ -11,11 +11,12 @@
 
 ### demo
 
-![demo](./assets/cjs2esm.gif)
+![demo](https://github.com/COOKIES-LGL/cjs2esm/blob/master/assets/cjs2esm.gif)
 
 ## For more information
 
 - [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
 - [@babel/plugin-transform-modules-commonjs](https://www.npmjs.com/package/@babel/plugin-transform-modules-commonjs)
 - [babel-plugin-transform-commonjs](https://www.npmjs.com/package/babel-plugin-transform-commonjs)
-  **Enjoy!**
+
+**Enjoy!**

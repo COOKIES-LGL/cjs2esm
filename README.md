@@ -11,7 +11,7 @@
 
 ### demo
 
-![demo](https://github.com/COOKIES-LGL/cjs2esm/blob/master/assets/cjs2esm.gif)
+![demo](./assets/cjs2esm.gif)
 
 ## For more information
 
